@@ -8,4 +8,5 @@ public class SetEntry
     private float weight;
     private int repetitions;
     private DateTime performedAt;
+    
 }
