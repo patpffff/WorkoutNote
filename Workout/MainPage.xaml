@@ -1,15 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Workout.MainPage">
+             xmlns:models="clr-namespace:Workout.Models"
+             xmlns:ViewModels="clr-namespace:Workout.ViewModels"
+             x:Class="Workout.MainPage"
+             x:DataType="ViewModels:MainViewModel">
 <VerticalStackLayout>
     <Label Text="Workouts" FontAttributes="Bold" FontSize="30" Margin="10,50,10,10" ></Label>
-    <CollectionView>
-        
+    <CollectionView ItemsSource="{Binding Workouts}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:WorkoutPlan">
+                <Frame Margin="10" Padding="10" BackgroundColor="LightGray">
+                    <Label Text="{Binding Name}" FontSize="80" TextColor="Red"/>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
     </CollectionView>
     <HorizontalStackLayout Padding="10">
-        <Button Text="+" FontAttributes="Bold" Margin="10"></Button> 
-        <Label Text="Workout hinzufügen" VerticalTextAlignment="Center"></Label>
+        <Button 
+            Text="+" 
+            FontAttributes="Bold" 
+            Margin="10"
+            Command="{Binding AddWithPopupCommand}"/> 
+        <Label 
+            Text="Workout hinzufügen" 
+            VerticalTextAlignment="Center"/>
     </HorizontalStackLayout>
     
 </VerticalStackLayout>

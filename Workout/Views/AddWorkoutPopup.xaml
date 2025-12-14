@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup 
+    x:TypeArguments="system:String"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    x:Class="Workout.Views.AddWorkoutPopup">
+
+    <VerticalStackLayout Padding="20" WidthRequest="300">
+        
+        <Label Text="Workout hinzufügen" FontAttributes="Bold" FontSize="20" />
+
+        <!-- WICHTIG -->
+        <Entry x:Name="Workoutname" Placeholder="Name des Workouts" />
+
+        <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
+            <Button Text="OK" Clicked="OnOkClicked"/>
+            <Button Text="Abbrechen" Clicked="OnCancelClicked"/>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</toolkit:Popup>
