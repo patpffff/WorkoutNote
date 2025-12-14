@@ -11,7 +11,7 @@
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:WorkoutPlan">
                 <Frame Margin="10" Padding="10" BackgroundColor="LightGray">
-                    <Label Text="{Binding Name}" FontSize="80" TextColor="Red"/>
+                    <Label Text="{Binding Name}" FontSize="20" TextColor="Black"/>
                 </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>

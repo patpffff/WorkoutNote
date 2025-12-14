@@ -20,7 +20,6 @@ public partial class MainPage : ContentPage
     {
         var popup = new AddWorkoutPopup();
         var popupResult = await this.ShowPopupAsync<string>(popup);
-        var typeName = popupResult.GetType().FullName;  // Ausgabe im Debugger
         var result = popupResult.Result;
 
         if (!string.IsNullOrEmpty(result))
