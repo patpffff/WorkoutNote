@@ -15,6 +15,9 @@ public static class MauiProgram
         }).UseMauiCommunityToolkit();
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<MainViewModel>();
+        
+        builder.Services.AddTransient<WorkoutViewModel>();
+        builder.Services.AddTransient<MainViewModel>();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

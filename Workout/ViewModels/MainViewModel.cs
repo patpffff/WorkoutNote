@@ -22,7 +22,10 @@ public partial class MainViewModel : ObservableObject
         Workouts = new ObservableCollection<WorkoutPlan>();
     }
     [ObservableProperty] 
-    private ObservableCollection<WorkoutPlan> workouts;
+    private ObservableCollection<WorkoutPlan> _workouts;
+
+    [ObservableProperty] 
+    private WorkoutPlan _workoutPlan;
 
 
 
@@ -49,7 +52,17 @@ public partial class MainViewModel : ObservableObject
             Name = result
         };
         Workouts.Add(newPlan);
-
-        System.Diagnostics.Debug.WriteLine($"Added WorkoutPlan: ID={newPlan.WorkoutID}, Name={newPlan.Name}");
     }
+
+    [RelayCommand]
+    async Task Navigation(WorkoutPlan workout)
+    {
+        await Shell.Current.GoToAsync(
+            nameof(WorkoutPage),
+            new Dictionary<string, object>
+            {
+                ["Workout"] = workout
+            });
+    }
+
 }

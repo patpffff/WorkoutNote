@@ -11,6 +11,12 @@
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:WorkoutPlan">
                 <Frame Margin="10" Padding="10" BackgroundColor="LightGray">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BindingContext.NavigationCommand,
+                  Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                            CommandParameter="{Binding .}"/>
+                    </Frame.GestureRecognizers>
                     <Label Text="{Binding Name}" FontSize="20" TextColor="Black"/>
                 </Frame>
             </DataTemplate>
