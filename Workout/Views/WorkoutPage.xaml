@@ -9,15 +9,17 @@
     <ContentPage.Content>
         <ScrollView>
             <VerticalStackLayout>
-                <Button
-                    Text="+" 
-                    FontAttributes="Bold" 
-                    Margin="10"/>
-                <Label 
-                    Text="Workout hinzufügen" 
-                    VerticalTextAlignment="Center"/>
+                <HorizontalStackLayout Padding="10">
+                    <Button 
+                        Text="+" 
+                        FontAttributes="Bold" 
+                        Margin="10"
+                        Command="{Binding AddWithPopupCommand}"/> 
+                    <Label 
+                        Text="Übung hinzufügen" 
+                        VerticalTextAlignment="Center"/>
+                </HorizontalStackLayout>
             </VerticalStackLayout>
-            
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

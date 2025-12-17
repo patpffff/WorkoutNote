@@ -7,9 +7,19 @@ namespace Workout.ViewModels;
 
 public partial class WorkoutViewModel : ObservableObject
 {
+    public event Func<Task>? AddExerciseRequested;
     [ObservableProperty]
     private WorkoutPlan workout;
     
     [RelayCommand]
     Task Back() => Shell.Current.GoToAsync("..");
+
+    [RelayCommand]
+    async Task AddWithPopup()
+    {
+        if (AddExerciseRequested != null)
+            await AddExerciseRequested.Invoke();
+    }
+
+
 }
