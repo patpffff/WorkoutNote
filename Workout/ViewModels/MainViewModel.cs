@@ -30,7 +30,15 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty] 
     private WorkoutPlan _workoutPlan;
 
+    [RelayCommand]
+    public async Task LoadWorkoutsAsync()
+    {
+        Workouts.Clear();
 
+        var workouts = await _database.GetWorkoutPlanAsync();
+        foreach (var workout in workouts)
+            Workouts.Add(workout);
+    }
 
     [RelayCommand]
     async Task AddWithPopup()
@@ -40,20 +48,20 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
-
-    void Delete(WorkoutPlan workout)
+    async Task Delete(WorkoutPlan workout)
     {
+        await _database.DeleteWorkoutPlanAsync(workout);
         Workouts.Remove(workout);
     }
     
     [RelayCommand]
-    public void AddWorkout(string result)
+    public async Task AddWorkout(string result)
     {
         var newPlan = new WorkoutPlan
         {
-            WorkoutID = Workouts.Count + 1,
             Name = result
         };
+        await _database.SaveWorkoutPlanAsync(newPlan);
         Workouts.Add(newPlan);
     }
 

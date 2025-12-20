@@ -15,6 +15,16 @@ public partial class MainPage : ContentPage
 
         vm.AddWorkoutRequested += OnAddWorkoutRequested;
     }
+    
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (BindingContext is MainViewModel vm)
+        {
+            await vm.LoadWorkoutsAsync();
+        }
+    }
 
     async Task OnAddWorkoutRequested()
     {
