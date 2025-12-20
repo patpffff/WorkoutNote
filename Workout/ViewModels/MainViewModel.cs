@@ -8,6 +8,7 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Workout.Data;
 using Workout.Models;
 using Workout.Views;
 using PropertyChangingEventHandler = Microsoft.Maui.Controls.PropertyChangingEventHandler;
@@ -16,9 +17,11 @@ namespace Workout.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
+    WorkoutDatabase _database;
     public event Func<Task>? AddWorkoutRequested;
-    public MainViewModel()
+    public MainViewModel(WorkoutDatabase database)
     {
+        _database = database;
         Workouts = new ObservableCollection<WorkoutPlan>();
     }
     [ObservableProperty] 
