@@ -31,12 +31,29 @@ public class WorkoutDatabase
         return await database.Table<Exercise>().ToListAsync();
     }
     
-    public async Task<List<WorkoutPlanExercise>> GetWorkoutPlanExercise(int WorkoutID)
+    public async Task<List<WorkoutPlanExercise>> GetWorkoutPlanExercise(int workoutPlanId)
     {
         await Init();
-        return await database.QueryAsync<WorkoutPlanExercise>(
-            "SELECT * FROM WorkoutPlanExercise WHERE WorkoutPlanID = ?",
-            WorkoutID);
+        return await database
+            .Table<WorkoutPlanExercise>()
+            .Where(wpe => wpe.WorkoutPlanID == workoutPlanId)
+            .ToListAsync();
     }
+
+    public async Task SaveWorkoutPlanAsync(WorkoutPlan workoutPlan)
+    {
+        await Init();
+
+        if (workoutPlan.WorkoutID != 0)
+            await database.UpdateAsync(workoutPlan);
+        else
+            await database.InsertAsync(workoutPlan);
+    }
+    public async Task DeleteWorkoutPlanAsync(WorkoutPlan workoutPlan)
+    {
+        await Init();
+        await database.DeleteAsync(workoutPlan);
+    }
+    
 
 }
