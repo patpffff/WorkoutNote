@@ -4,17 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui.Views;
+using Workout.Data;
 using Workout.ViewModels;
 
 namespace Workout.Views;
 
 public partial class AddExercisePopup : Popup<string>
 {
-    public AddExercisePopup(AddExercisePopupViewModel vm)
+    public AddExercisePopup(WorkoutViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;
     }
+
 
     private async void OnOkClicked(object? sender, EventArgs e)
     {

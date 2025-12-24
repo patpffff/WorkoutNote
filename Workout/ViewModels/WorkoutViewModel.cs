@@ -16,21 +16,22 @@ public partial class WorkoutViewModel : ObservableObject
     [ObservableProperty]
     private WorkoutPlan workout;
 
-    [ObservableProperty] 
-    private Exercise _exercise;
+
     
     [ObservableProperty] 
     private ObservableCollection<WorkoutPlanExercise> _workoutPlanExercises;
     
-    [ObservableProperty] 
-    private ObservableCollection<Exercise> _exercises;
+
     
     public WorkoutViewModel(WorkoutDatabase database)
     {
         _database = database;
         _workoutPlanExercises = new ObservableCollection<WorkoutPlanExercise>();
-        _exercises = new ObservableCollection<Exercise>();
+        Exercises = new ObservableCollection<Exercise>();
     }
+    [ObservableProperty]
+    private ObservableCollection<Exercise> _exercises;
+
 
     public object DeleteCommand { get; }
     public object NavigationCommand { get; }
@@ -56,6 +57,17 @@ public partial class WorkoutViewModel : ObservableObject
         var result = await _database.GetWorkoutPlanExercise(Workout.WorkoutID);
         foreach (var wpe in result)
             _workoutPlanExercises.Add(wpe);
+    }
+    
+    [RelayCommand]
+    public async Task LoadExercisesAsync()
+    {
+        var result = await _database.GetExerciseAsync();
+        foreach (var exercise in result)
+            Exercises.Add(exercise);
+        
+        var test = new Exercise {Name = "Test"};
+        Exercises.Add(test);
     }
 
 

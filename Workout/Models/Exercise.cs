@@ -5,5 +5,5 @@ public class Exercise
 {
     [PrimaryKey, AutoIncrement]
     public int ExerciseID { get; set; }
-    public string Name;
+    public string Name { get; set; }
 }

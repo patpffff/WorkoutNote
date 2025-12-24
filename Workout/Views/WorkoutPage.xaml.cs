@@ -11,10 +11,13 @@ namespace Workout.Views;
 
 public partial class WorkoutPage : ContentPage
 {
-    public WorkoutPage(WorkoutViewModel vm)
+    private readonly AddExercisePopupViewModel _popupViewModel;
+
+    public WorkoutPage(WorkoutViewModel vm, AddExercisePopupViewModel popupViewModel)
     {
         InitializeComponent();
         BindingContext = vm;
+        _popupViewModel = popupViewModel;
         vm.AddExerciseRequested += OnAddExerciseRequested;
 
     }
@@ -31,15 +34,21 @@ public partial class WorkoutPage : ContentPage
     
     async Task OnAddExerciseRequested()
     {
-        var serviceProvider = Application.Current.Handler.MauiContext.Services;
-        var popup = serviceProvider.GetRequiredService<AddExercisePopup>();
+        var vm = (WorkoutViewModel)BindingContext;
+        
+        // ERST Daten laden
+        await vm.LoadExercisesAsync();
+        
+        // DANN Popup mit Daten erstellen
+        var popup = new AddExercisePopup(vm);
+        
         var popupResult = await this.ShowPopupAsync<string>(popup);
         var result = popupResult.Result;
 
         if (!string.IsNullOrEmpty(result))
         {
             // Übergabe ans ViewModel
-            var vm = (WorkoutViewModel)BindingContext;
+           // var vm = (WorkoutViewModel)BindingContext;
             //vm.AddWorkout(result);
         }
     }
