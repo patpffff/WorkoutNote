@@ -33,7 +33,6 @@ public partial class MainPage : ContentPage
         var popupResult = await this.ShowPopupAsync<string>(popup, new PopupOptions
         {
             CanBeDismissedByTappingOutsideOfPopup = false,
-            PageOverlayColor = Colors.Black.WithAlpha(0.5f)
         });
         var result = popupResult.Result;
 
