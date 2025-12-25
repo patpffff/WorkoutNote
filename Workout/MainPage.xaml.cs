@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Extensions;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Extensions;
 using CommunityToolkit.Maui.Views;
 using Workout.Models;
 using Workout.ViewModels;
@@ -29,7 +30,11 @@ public partial class MainPage : ContentPage
     async Task OnAddWorkoutRequested()
     {
         var popup = new AddWorkoutPopup();
-        var popupResult = await this.ShowPopupAsync<string>(popup);
+        var popupResult = await this.ShowPopupAsync<string>(popup, new PopupOptions
+        {
+            CanBeDismissedByTappingOutsideOfPopup = false,
+            PageOverlayColor = Colors.Black.WithAlpha(0.5f)
+        });
         var result = popupResult.Result;
 
         if (!string.IsNullOrEmpty(result))

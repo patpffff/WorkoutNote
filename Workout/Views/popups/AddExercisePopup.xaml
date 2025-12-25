@@ -34,5 +34,4 @@
             </HorizontalStackLayout>
         </VerticalStackLayout>
         </ScrollView>
-
 </toolkit:Popup>
