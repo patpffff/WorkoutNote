@@ -16,7 +16,8 @@
                 <Button 
                     Text="Neue Übung anlegen"
                     FontAttributes="Bold" 
-                    Margin="0,0,0,20"/> 
+                    Margin="0,0,0,20"
+                    Clicked="OnNewExerciseClicked"/> 
                 <Label Text="Übungen zuordnen" FontAttributes="Bold" FontSize="20" />
                 <CollectionView ItemsSource="{Binding Exercises}">
                    <CollectionView.ItemTemplate>

@@ -27,4 +27,10 @@ public partial class AddExercisePopup : Popup<string>
     {
         await CloseAsync();
     }
+
+    private async void OnNewExerciseClicked(object? sender, EventArgs e)
+    {
+        await CloseAsync();
+        await Shell.Current.GoToAsync(nameof(ExercisePage));
+    }
 }

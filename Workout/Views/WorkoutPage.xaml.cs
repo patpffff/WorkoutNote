@@ -11,8 +11,6 @@ namespace Workout.Views;
 
 public partial class WorkoutPage : ContentPage
 {
-
-
     public WorkoutPage(WorkoutViewModel vm)
     {
         InitializeComponent();
@@ -42,6 +40,13 @@ public partial class WorkoutPage : ContentPage
         var popup = new AddExercisePopup(vm);
         
         var popupResult = await this.ShowPopupAsync<string>(popup);
+        var result = popupResult.Result;
 
+        if (!string.IsNullOrEmpty(result))
+        {
+            // Übergabe ans ViewModel
+           // var vm = (WorkoutViewModel)BindingContext;
+            //vm.AddWorkout(result);
+        }
     }
 }

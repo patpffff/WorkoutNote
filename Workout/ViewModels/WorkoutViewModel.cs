@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Workout.Data;
 using Workout.Models;
+using Workout.Views;
 
 namespace Workout.ViewModels;
 [QueryProperty(nameof(Workout), "Workout")]
@@ -33,8 +34,7 @@ public partial class WorkoutViewModel : ObservableObject
     private ObservableCollection<Exercise> _exercises;
 
 
-    public object DeleteCommand { get; }
-    public object NavigationCommand { get; }
+
 
     [RelayCommand]
     Task Back() => Shell.Current.GoToAsync("..");
@@ -69,6 +69,4 @@ public partial class WorkoutViewModel : ObservableObject
         var test = new Exercise {Name = "Test"};
         Exercises.Add(test);
     }
-
-
 }

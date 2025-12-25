@@ -23,7 +23,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<WorkoutDatabase>();
         
-        //builder.Services.AddTransient<AddExercisePopup>();
+
         
 #if DEBUG
         builder.Logging.AddDebug();
