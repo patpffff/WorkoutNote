@@ -43,6 +43,7 @@ public partial class WorkoutPage : ContentPage
         var popupResult = await this.ShowPopupAsync<string>(popup, new PopupOptions
         {
             CanBeDismissedByTappingOutsideOfPopup = false,
+            PageOverlayColor = Colors.Black.WithAlpha(0.75f)
         });
         var result = popupResult.Result;
 

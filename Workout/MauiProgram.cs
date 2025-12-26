@@ -17,10 +17,10 @@ public static class MauiProgram
         }).UseMauiCommunityToolkit();
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<MainViewModel>();
-        
+        builder.Services.AddTransient<ExerciseViewModel>();
+        builder.Services.AddTransient<ExercisePage>();
         builder.Services.AddTransient<WorkoutViewModel>();
         builder.Services.AddTransient<WorkoutPage>();
-
         builder.Services.AddSingleton<WorkoutDatabase>();
         
 

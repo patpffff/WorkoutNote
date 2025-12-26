@@ -33,14 +33,14 @@ public partial class MainPage : ContentPage
         var popupResult = await this.ShowPopupAsync<string>(popup, new PopupOptions
         {
             CanBeDismissedByTappingOutsideOfPopup = false,
+            PageOverlayColor = Colors.Black.WithAlpha(0.75f)
         });
         var result = popupResult.Result;
-
         if (!string.IsNullOrEmpty(result))
         {
             // Übergabe ans ViewModel
             var vm = (MainViewModel)BindingContext;
-            vm.AddWorkout(result);
+            await vm.AddWorkout(result);
         }
     }
 }

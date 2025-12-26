@@ -65,8 +65,5 @@ public partial class WorkoutViewModel : ObservableObject
         var result = await _database.GetExerciseAsync();
         foreach (var exercise in result)
             Exercises.Add(exercise);
-        
-        var test = new Exercise {Name = "Test"};
-        Exercises.Add(test);
     }
 }

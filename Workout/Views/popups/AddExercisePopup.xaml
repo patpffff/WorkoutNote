@@ -10,7 +10,6 @@
              xmlns:models="clr-namespace:Workout.Models"
              x:Class="Workout.Views.AddExercisePopup"
              x:DataType="viewModels:WorkoutViewModel">
-
         <ScrollView>    
             <VerticalStackLayout>
                 <Button 
