@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Workout.Data;
 using Workout.Models;
+using Workout.Views;
 
 namespace Workout.ViewModels;
 
@@ -11,8 +12,6 @@ public partial class ExerciseViewModel: ObservableObject
     public event Func<Task>? AddExerciseRequested;
     WorkoutDatabase _database;
     
-    [ObservableProperty]
-    private Exercise exercise;
     
     [ObservableProperty]
     ObservableCollection<Exercise> exercises;
@@ -28,14 +27,17 @@ public partial class ExerciseViewModel: ObservableObject
     {
         Exercises.Clear();
         var result = await _database.GetExerciseAsync();
-        foreach (var entry in result)
-            Exercises.Add(entry);
+        foreach (var exercise in result)
+            Exercises.Add(exercise);
     }
     [RelayCommand]
-    public async Task SaveExerciseAsync()
+    public async Task AddExerciseAsync(string exerciseName)
     {
-        await _database.SaveExerciseAsync(Exercise);
-        await Shell.Current.GoToAsync("..");
+        var newExercise = new Exercise
+        {
+            Name = exerciseName
+        };
+        await _database.SaveExerciseAsync(newExercise);
     }
     
     [RelayCommand]
@@ -43,5 +45,15 @@ public partial class ExerciseViewModel: ObservableObject
     {
         if (AddExerciseRequested != null)
             await AddExerciseRequested.Invoke();
+    }
+    [RelayCommand]
+    async Task Navigation(Exercise exercise)
+    {
+        await Shell.Current.GoToAsync(
+            nameof(ExerciseDetailPage),
+            new Dictionary<string, object>
+            {
+                ["Exercise"] = exercise
+            });
     }
 }

@@ -2,10 +2,10 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ViewModels="clr-namespace:Workout.ViewModels"
+             xmlns:viewModels="clr-namespace:Workout.ViewModels"
              xmlns:models="clr-namespace:Workout.Models"
              x:Class="Workout.Views.WorkoutPage"
-             x:DataType="ViewModels:WorkoutViewModel"
+             x:DataType="viewModels:WorkoutViewModel"
              Title="{Binding Workout.Name}">
     <ContentPage.Content>
         <ScrollView>

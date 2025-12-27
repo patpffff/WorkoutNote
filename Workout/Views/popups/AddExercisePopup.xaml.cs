@@ -1,36 +1,26 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui.Views;
-using Workout.Data;
-using Workout.ViewModels;
+using Workout.Models;
 
-namespace Workout.Views;
+namespace Workout.Views.popups;
 
 public partial class AddExercisePopup : Popup<string>
 {
-    public AddExercisePopup(WorkoutViewModel vm)
+    public AddExercisePopup()
     {
         InitializeComponent();
-        BindingContext = vm;
     }
-
-
-    private async void OnOkClicked(object? sender, EventArgs e)
+    public async void OnOkClicked(object? sender, EventArgs e)
     {
-        await CloseAsync();
+        await CloseAsync(ExerciseName.Text);
     }
-
+    
     private async void OnCancelClicked(object? sender, EventArgs e)
     {
         await CloseAsync();
-    }
-
-    private async void OnNewExerciseClicked(object? sender, EventArgs e)
-    {
-        await CloseAsync();
-        await Shell.Current.GoToAsync(nameof(ExercisePage));
     }
 }

@@ -8,7 +8,7 @@
              x:DataType="viewModels:ExerciseViewModel">
     <VerticalStackLayout>
         <Label Text="Übungen" FontAttributes="Bold" FontSize="30" Margin="10,10,10,10" ></Label>
-        <CollectionView ItemsSource="{Binding Exercise}">
+        <CollectionView ItemsSource="{Binding Exercises}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Exercise">
                     <SwipeView>
@@ -19,6 +19,12 @@
                                        CommandParameter="{Binding .}"/>
                         </SwipeView.RightItems>
                         <Border Margin="10" Padding="10" BackgroundColor="LightGray">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding BindingContext.NavigationCommand,
+                  Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
                             <Label Text="{Binding Name}" FontSize="20" TextColor="Black"/>
                         </Border>
                     </SwipeView>

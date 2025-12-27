@@ -15,13 +15,16 @@ public static class MauiProgram
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
         }).UseMauiCommunityToolkit();
+        builder.Services.AddSingleton<WorkoutDatabase>();
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddTransient<ExerciseViewModel>();
         builder.Services.AddTransient<ExercisePage>();
         builder.Services.AddTransient<WorkoutViewModel>();
         builder.Services.AddTransient<WorkoutPage>();
-        builder.Services.AddSingleton<WorkoutDatabase>();
+        builder.Services.AddTransient<ExerciseDetailPage>();
+        builder.Services.AddTransient<ExerciseDetailViewModel>();
+
         
 
         

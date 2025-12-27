@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Extensions;
 using Workout.ViewModels;
+using Workout.Views.popups;
 
 namespace Workout.Views;
 

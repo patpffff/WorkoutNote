@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Extensions;
 using Workout.Data;
+using Workout.Models;
 using Workout.ViewModels;
+using Workout.Views.popups;
 
 namespace Workout.Views;
 
@@ -26,8 +30,21 @@ public partial class ExercisePage : ContentPage
         }
     }
 
-    private Task OnAddExerciseRequested()
+    async Task OnAddExerciseRequested()
     {
-        //throw new NotImplementedException();
+        var popup = new AddExercisePopup();
+        var popupResult = await this.ShowPopupAsync<string>(popup, new PopupOptions
+        {
+            CanBeDismissedByTappingOutsideOfPopup = false,
+            PageOverlayColor = Colors.Black.WithAlpha(0.75f)
+        });
+        var result = popupResult.Result;
+        
+        if (!string.IsNullOrEmpty(result))
+        {
+            // Übergabe ans ViewModel
+            var vm = (ExerciseViewModel)BindingContext;
+            await vm.AddExerciseAsync(result);
+        }
     }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<toolkit:Popup 
+    x:TypeArguments="system:String"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:viewModels="clr-namespace:Workout.ViewModels"
+             xmlns:models="clr-namespace:Workout.Models"
+             x:Class="Workout.Views.popups.AddWorkoutExercisePopup"
+             x:DataType="viewModels:WorkoutViewModel">
+        <ScrollView>    
+            <VerticalStackLayout>
+                <Button 
+                    Text="Neue Übung anlegen"
+                    FontAttributes="Bold" 
+                    Margin="0,0,0,20"
+                    Clicked="OnNewExerciseClicked"/> 
+                <Label Text="Übungen zuordnen" FontAttributes="Bold" FontSize="20" />
+                <CollectionView ItemsSource="{Binding Exercises}">
+                   <CollectionView.ItemTemplate>
+                       <DataTemplate x:DataType="models:Exercise">
+                           <Border Margin="10" Padding="10" BackgroundColor="LightGray">
+                               <Label Text="{Binding Name}" FontSize="20" TextColor="Black"/>
+                           </Border>
+                       </DataTemplate>
+                   </CollectionView.ItemTemplate> 
+                </CollectionView>
+            <HorizontalStackLayout Margin="0,20,0,0" Spacing="10" HorizontalOptions="Center">
+                <Button Text="OK" Clicked="OnOkClicked"/>
+                <Button Text="Abbrechen" Clicked="OnCancelClicked"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        </ScrollView>
+</toolkit:Popup>
