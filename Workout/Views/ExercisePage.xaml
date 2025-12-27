@@ -6,7 +6,8 @@
              xmlns:viewModels="clr-namespace:Workout.ViewModels"
              x:Class="Workout.Views.ExercisePage"
              x:DataType="viewModels:ExerciseViewModel">
-    <VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
         <Label Text="Übungen" FontAttributes="Bold" FontSize="30" Margin="10,10,10,10" ></Label>
         <CollectionView ItemsSource="{Binding Exercises}">
             <CollectionView.ItemTemplate>
@@ -41,6 +42,6 @@
                 Text="Übung hinzufügen" 
                 VerticalTextAlignment="Center"/>
         </HorizontalStackLayout>
-    
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

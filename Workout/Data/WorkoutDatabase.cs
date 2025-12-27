@@ -54,6 +54,12 @@ public class WorkoutDatabase
         await Init();
         await database.DeleteAsync(workoutPlan);
     }
+
+    public async Task DeleteExerciseAsync(Exercise exercise)
+    {
+        await  Init();
+        await database.DeleteAsync(exercise);
+    }
     
     public async Task SaveExerciseAsync(Exercise exercise)
     {

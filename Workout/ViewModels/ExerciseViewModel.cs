@@ -38,6 +38,7 @@ public partial class ExerciseViewModel: ObservableObject
             Name = exerciseName
         };
         await _database.SaveExerciseAsync(newExercise);
+        Exercises.Add(newExercise);
     }
     
     [RelayCommand]
@@ -45,6 +46,12 @@ public partial class ExerciseViewModel: ObservableObject
     {
         if (AddExerciseRequested != null)
             await AddExerciseRequested.Invoke();
+    }
+    [RelayCommand]
+    async Task Delete(Exercise exercise)
+    {
+        await _database.DeleteExerciseAsync(exercise);
+        Exercises.Remove(exercise);
     }
     [RelayCommand]
     async Task Navigation(Exercise exercise)
