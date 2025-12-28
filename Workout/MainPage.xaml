@@ -6,7 +6,7 @@
              x:Class="Workout.MainPage"
              x:DataType="ViewModels:MainViewModel">
 <VerticalStackLayout>
-    <Label Text="Workouts" FontAttributes="Bold" FontSize="30" Margin="10,50,10,10" ></Label>
+    <Label Text="Workouts" FontAttributes="Bold" FontSize="30" Margin="10,10,10,10" ></Label>
         <CollectionView ItemsSource="{Binding Workouts}">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:WorkoutPlan">
