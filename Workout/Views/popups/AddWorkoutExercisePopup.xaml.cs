@@ -3,7 +3,7 @@ using Workout.ViewModels;
 
 namespace Workout.Views.popups;
 
-public partial class AddWorkoutExercisePopup : Popup<string>
+public partial class AddWorkoutExercisePopup : Popup
 {
     public AddWorkoutExercisePopup(WorkoutViewModel vm)
     {

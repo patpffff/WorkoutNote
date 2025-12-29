@@ -71,4 +71,13 @@ public class WorkoutDatabase
             await database.InsertAsync(exercise);
     }
 
+    public async Task AddWorkoutPlanExercise(WorkoutPlanExercise workoutPlanExercise)
+    {
+        await Init();
+        if (workoutPlanExercise.WorkoutPlanExerciseId != 0)
+            await database.UpdateAsync(workoutPlanExercise);
+        else
+            await database.InsertAsync(workoutPlanExercise);
+    }
+
 }

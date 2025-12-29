@@ -32,8 +32,21 @@ public partial class WorkoutViewModel : ObservableObject
         Exercises = new ObservableCollection<Exercise>();
     }
 
-
-
+    [RelayCommand]
+    public async Task AddExerciseToWorkout(Exercise exercise)
+    {
+        if (exercise.ExerciseID != null && Workout.WorkoutID != null)
+        {
+            var entry = new WorkoutPlanExercise
+            {
+                WorkoutPlanID = Workout.WorkoutID,
+                ExerciseID = exercise.ExerciseID,
+                OrderIndex = WorkoutPlanExercises.Count
+            };
+            WorkoutPlanExercises.Add(entry);
+            await _database.AddWorkoutPlanExercise(entry);
+        }
+    }
 
 
     [RelayCommand]

@@ -8,6 +8,6 @@
              x:DataType="viewModels:ExerciseDetailViewModel"
              Title="{Binding Exercise.Name}">
     <ContentPage.Content>
-        
+        <Grid></Grid>
     </ContentPage.Content>
 </ContentPage>

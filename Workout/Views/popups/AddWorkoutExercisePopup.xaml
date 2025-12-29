@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<toolkit:Popup 
-    x:TypeArguments="system:String"
+<toolkit:Popup
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -22,6 +21,12 @@
                    <CollectionView.ItemTemplate>
                        <DataTemplate x:DataType="models:Exercise">
                            <Border Margin="10" Padding="10" BackgroundColor="LightGray">
+                               <Border.GestureRecognizers>
+                                   <TapGestureRecognizer
+                                       Command="{Binding BindingContext.AddExerciseToWorkoutCommand,
+              Source={RelativeSource AncestorType={x:Type toolkit:Popup}}}"
+                                       CommandParameter="{Binding .}" />
+                               </Border.GestureRecognizers>
                                <Label Text="{Binding Name}" FontSize="20" TextColor="Black"/>
                            </Border>
                        </DataTemplate>
