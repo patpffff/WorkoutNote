@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Workout.Data;
 using Workout.Models;
 using Workout.Views;
+using Workout.Views.view;
 
 namespace Workout.ViewModels;
 [QueryProperty(nameof(Workout), "Workout")]
@@ -22,11 +23,14 @@ public partial class WorkoutViewModel : ObservableObject
     
     [ObservableProperty] 
     private ObservableCollection<WorkoutPlanExercise> _workoutPlanExercises;
-    
 
-    
+    [ObservableProperty] 
+    private ObservableCollection<WorkoutPlanExerciseView> _workoutPlanExerciseViews;
+
+
     public WorkoutViewModel(WorkoutDatabase database)
     {
+        WorkoutPlanExerciseViews = new ObservableCollection<WorkoutPlanExerciseView>();
         _database = database;
         _workoutPlanExercises = new ObservableCollection<WorkoutPlanExercise>();
         Exercises = new ObservableCollection<Exercise>();
@@ -79,5 +83,23 @@ public partial class WorkoutViewModel : ObservableObject
         var result = await _database.GetExerciseAsync();
         foreach (var exercise in result)
             Exercises.Add(exercise);
+    }
+    
+    [RelayCommand]
+    public async Task LoadWorkoutPlanExerciseView()
+    {
+        await LoadExercisesAsync();
+        await LoadWorkoutPlanExercisesAsync();
+        foreach (var wpe in WorkoutPlanExercises)
+        {
+            WorkoutPlanExerciseViews.Add(new WorkoutPlanExerciseView
+            {
+                WorkoutPlanExerciseId = wpe.WorkoutPlanExerciseId,
+                WorkoutPlanID = wpe.WorkoutPlanID,
+                ExerciseID = wpe.ExerciseID,
+                ExerciseName = Exercises.Where(e => e.ExerciseID == wpe.ExerciseID).Select(e => e.Name).FirstOrDefault(),
+                OrderIndex = wpe.OrderIndex
+            });
+        }
     }
 }
