@@ -17,7 +17,7 @@ public partial class WorkoutViewModel : ObservableObject
     WorkoutDatabase _database;
     
     [ObservableProperty]
-    private WorkoutPlan workout;
+    private WorkoutPlan _workout;
 
     [ObservableProperty]
     private ObservableCollection<Exercise> _exercises;
@@ -104,5 +104,14 @@ public partial class WorkoutViewModel : ObservableObject
                 OrderIndex = wpe.OrderIndex
             });
         }
+    }
+
+    [RelayCommand]
+    public async Task Navigation(WorkoutPlanExerciseView workoutPlanExerciseView)
+    {
+        await Shell.Current.GoToAsync(nameof(ExerciseDetailPage), new Dictionary<string, object>
+        {
+            ["WorkoutPlanExerciseView"]  = workoutPlanExerciseView
+        });
     }
 }

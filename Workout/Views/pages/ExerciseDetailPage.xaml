@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:Workout.Models"
              x:Class="Workout.Views.ExerciseDetailPage"
              x:DataType="viewModels:ExerciseDetailViewModel"
-             Title="{Binding Exercise.Name}">
+             Title="{Binding Title}">
     <ContentPage.Content>
         <VerticalStackLayout>
             <CollectionView ItemsSource="{Binding SetEntries}">
