@@ -80,4 +80,19 @@ public class WorkoutDatabase
             await database.InsertAsync(workoutPlanExercise);
     }
 
+    public async Task AddSetEntryAsync(SetEntry setEntry)
+    {
+        await Init();
+        if (setEntry.SetEntryId != 0)
+            await database.UpdateAsync(setEntry);
+        else
+            await database.InsertAsync(setEntry);
+    }
+
+    public async Task<List<SetEntry>> GetSetEntry(int exerciseId)
+    {
+        await Init();
+        return await database.Table<SetEntry>().Where(x => x.ExerciseId == exerciseId)
+            .OrderByDescending(x => x.performedAt).ToListAsync();
+    }
 }

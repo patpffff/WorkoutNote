@@ -13,17 +13,22 @@ public partial class ExerciseDetailViewModel: ObservableObject
 {
     WorkoutDatabase _database;
     [ObservableProperty] private int _exerciseIdFromObject;
+    [ObservableProperty] private bool _isHistoryExpanded;
     [ObservableProperty] private string _title = string.Empty;
     [ObservableProperty] private Exercise? _exercise;
     [ObservableProperty] private WorkoutPlanExerciseView? _workoutPlanExerciseView;
 
     [ObservableProperty] 
     private ObservableCollection<SetEntry> _setEntries;
+    [ObservableProperty] 
+    private ObservableCollection<SetEntry> _setHistory;
 
     public ExerciseDetailViewModel(WorkoutDatabase database)
     {
         _database = database;
         SetEntries = new ObservableCollection<SetEntry>();
+        SetHistory = new ObservableCollection<SetEntry>();
+        IsHistoryExpanded = false;
     }
     [RelayCommand]
     public async Task LoadSetEntriesAsync()
@@ -33,8 +38,8 @@ public partial class ExerciseDetailViewModel: ObservableObject
         {
             ExerciseId = ExerciseIdFromObject,
             setNumber = SetEntries.Count+1,
-            repetitions = 0,
-            weight = 0,
+            repetitions = null,
+            weight = null,
             performedAt =  DateTime.Now,
         });
     }
@@ -45,8 +50,8 @@ public partial class ExerciseDetailViewModel: ObservableObject
         {
             ExerciseId = ExerciseIdFromObject,
             setNumber = SetEntries.Count+1,
-            repetitions = 0,
-            weight = 0,
+            repetitions = null,
+            weight = null,
             performedAt =  DateTime.Now,
         });
     }
@@ -76,4 +81,33 @@ public partial class ExerciseDetailViewModel: ObservableObject
         }
     }
 
+    [RelayCommand]
+    public async Task SaveSet()
+    {
+        foreach (var entry in SetEntries)
+        {
+            if (entry.repetitions > 0 && entry.weight > 0)
+            {
+                entry.performedAt = DateTime.Now;
+                await _database.AddSetEntryAsync(entry);
+            }
+        }
+        SetEntries.Clear();
+    }
+
+    [RelayCommand]
+    public async Task LoadSetHistory()
+    {
+        if (!IsHistoryExpanded)
+        {
+            SetHistory.Clear();
+            return;
+        }
+      
+        var result = await _database.GetSetEntry(ExerciseIdFromObject);
+        foreach (var setEntry in result)
+        {
+            SetHistory.Add(setEntry);
+        }
+    }
 }

@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Workout.ViewModels"
              xmlns:models="clr-namespace:Workout.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Workout.Views.ExerciseDetailPage"
              x:DataType="viewModels:ExerciseDetailViewModel"
              Title="{Binding Title}">
@@ -21,11 +22,13 @@
                                 VerticalTextAlignment="Center"
                                 />
                             <Entry 
+                                Text="{Binding repetitions}"
                                 Placeholder="Wdh."
                                 WidthRequest="50"
                                 HorizontalTextAlignment="Center"
                                 Margin="0,0,5,0"/>
                             <Entry
+                                Text="{Binding weight}"
                                 Placeholder="Gewicht"
                                 WidthRequest="80"
                                 HorizontalTextAlignment="Center"
@@ -39,7 +42,7 @@
                     </DataTemplate>    
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Grid ColumnDefinitions="*,*"
+            <Grid ColumnDefinitions="*,*,*"
                    Margin="0,10,0,0">
                 <Label
                     Grid.Column="0"
@@ -57,9 +60,22 @@
                         <TapGestureRecognizer Command="{Binding AddSetCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
-
-                <Label
+                <Button
                     Grid.Column="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Margin="0,0,60,0"
+                    Padding="0,0,0,0"
+                    Text="Speichern"
+                    FontSize="16"
+                    WidthRequest="200"
+                    CornerRadius="100"
+                    BackgroundColor="DarkBlue"
+                    TextColor="White"
+                    Command="{Binding SaveSetCommand}"
+                />
+                <Label
+                    Grid.Column="2"
                     HorizontalOptions="End"
                     Margin="0,0,90,0"
                     Padding="0,0,0,10"
@@ -76,7 +92,32 @@
                     </Label.GestureRecognizers>
                 </Label>
             </Grid>
-
+            <ScrollView>
+            <toolkit:Expander Command="{Binding LoadSetHistoryCommand}" IsExpanded="{Binding IsHistoryExpanded, Mode=TwoWay}">
+                <toolkit:Expander.Header>
+                    <Label Text="Verlauf"
+                           FontAttributes="Bold"
+                           FontSize="Medium" >
+                           </Label>
+                </toolkit:Expander.Header>
+                    <CollectionView ItemsSource="{Binding SetHistory}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:SetEntry">
+                                <HorizontalStackLayout Margin="0,0,80,0">
+                                    <Label
+                                        Margin="0,0,80,0"
+                                        Text="{Binding performedAt}"/>
+                                    <Label
+                                        Margin="0,0,80,0"
+                                        Text="{Binding repetitions}"/>
+                                    <Label
+                                        Text="{Binding weight}"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+            </toolkit:Expander>
+            </ScrollView>
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>
