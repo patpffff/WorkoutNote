@@ -86,9 +86,8 @@ public partial class ExerciseDetailViewModel: ObservableObject
     {
         foreach (var entry in SetEntries)
         {
-            if (entry.repetitions > 0 && entry.weight > 0)
+            if (entry.weight > 0 && entry.repetitions > 0)
             {
-                entry.performedAt = DateTime.Now;
                 await _database.AddSetEntryAsync(entry);
             }
         }
@@ -109,5 +108,15 @@ public partial class ExerciseDetailViewModel: ObservableObject
         {
             SetHistory.Add(setEntry);
         }
+    }
+
+    public async Task LoadExercise()
+    {
+        Exercise = await _database.GetExerciseFromId(ExerciseIdFromObject);
+    }
+
+    public async Task SaveExerciseComment()
+    {
+        if (Exercise != null) await _database.SaveExerciseComment(Exercise);
     }
 }

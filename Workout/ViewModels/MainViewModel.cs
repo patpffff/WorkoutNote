@@ -50,8 +50,12 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     async Task Delete(WorkoutPlan workout)
     {
-        await _database.DeleteWorkoutPlanAsync(workout);
-        Workouts.Remove(workout);
+        bool delete = await Application.Current.MainPage.DisplayAlert("Delete", "Sind Sie sicher, dass sie Die Übung löschen wollen?", "OK" , "Abbrechen");
+        if (delete)
+        {
+            await _database.DeleteWorkoutPlanAsync(workout);
+            Workouts.Remove(workout);    
+        }
     }
     
     [RelayCommand]

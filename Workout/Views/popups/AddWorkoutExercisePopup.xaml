@@ -14,28 +14,37 @@
                 <Button 
                     Text="Neue Übungen anlegen"
                     FontAttributes="Bold" 
+                    HorizontalOptions="Center"
+                    FontFamily="MetropolisBold"
                     Margin="0,0,0,20"
                     Clicked="OnNewExerciseClicked"/> 
-                <Label Text="Übungen zuordnen" FontAttributes="Bold" FontSize="20" />
                 <CollectionView ItemsSource="{Binding Exercises}">
                    <CollectionView.ItemTemplate>
                        <DataTemplate x:DataType="models:Exercise">
-                           <Border Margin="10" Padding="10" BackgroundColor="LightGray">
+                           <Border 
+                               Margin="10"
+                               StrokeThickness="1">
                                <Border.GestureRecognizers>
                                    <TapGestureRecognizer
                                        Command="{Binding BindingContext.AddExerciseToWorkoutCommand,
               Source={RelativeSource AncestorType={x:Type toolkit:Popup}}}"
                                        CommandParameter="{Binding .}" />
                                </Border.GestureRecognizers>
-                               <Label Text="{Binding Name}" FontSize="20" TextColor="Black"/>
+                               <Label 
+                                   Text="{Binding Name}" 
+                                   Padding="10"
+                                   FontSize="30" 
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="Center"
+                                   TextColor="Black"
+                                   FontFamily="MetropolisBold"/>
                            </Border>
                        </DataTemplate>
                    </CollectionView.ItemTemplate> 
                 </CollectionView>
-            <HorizontalStackLayout Margin="0,20,0,0" Spacing="10" HorizontalOptions="Center">
-                <Button Text="OK" Clicked="OnOkClicked"/>
-                <Button Text="Abbrechen" Clicked="OnCancelClicked"/>
-            </HorizontalStackLayout>
+                <Button Text="Abbrechen" 
+                        Clicked="OnCancelClicked"
+                        HorizontalOptions="Center"/>
         </VerticalStackLayout>
         </ScrollView>
 </toolkit:Popup>

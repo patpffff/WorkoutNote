@@ -6,52 +6,67 @@
              xmlns:models="clr-namespace:Workout.Models"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Workout.Views.ExerciseDetailPage"
-             x:DataType="viewModels:ExerciseDetailViewModel"
-             Title="{Binding Title}">
+             x:DataType="viewModels:ExerciseDetailViewModel">
     <ContentPage.Content>
         <VerticalStackLayout>
+            <Label Text="{Binding Title}" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center"
+                   FontSize="30" Margin="10,10,10,10" 
+                   FontFamily="PricedownBl" ></Label>
+            <VerticalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnBackgroundTapped"></TapGestureRecognizer>
+            </VerticalStackLayout.GestureRecognizers>
             <CollectionView ItemsSource="{Binding SetEntries}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:SetEntry">
-                        <HorizontalStackLayout 
-                            Margin="60,10,20, 0"
+                        <Grid
+                            ColumnDefinitions="Auto,*,*,Auto"
+                            Margin="20,10,20,0"
+                            ColumnSpacing="10"
                             VerticalOptions="Center">
-                            <Label 
+
+                            <!-- Satz -->
+                            <Label
+                                Grid.Column="0"
                                 Text="{Binding setNumber, StringFormat='Satz {0}'}"
-                                WidthRequest="50"
-                                VerticalTextAlignment="Center"
-                                />
-                            <Entry 
+                                VerticalTextAlignment="Center" />
+
+                            <!-- Wiederholungen -->
+                            <Entry
+                                x:Name="Repetition"
+                                Grid.Column="1"
                                 Text="{Binding repetitions}"
                                 Placeholder="Wdh."
-                                WidthRequest="50"
-                                HorizontalTextAlignment="Center"
-                                Margin="0,0,5,0"/>
+                                HorizontalTextAlignment="Center" />
+
+                            <!-- Gewicht -->
                             <Entry
+                                x:Name="Weight"
+                                Grid.Column="2"
                                 Text="{Binding weight}"
                                 Placeholder="Gewicht"
-                                WidthRequest="80"
-                                HorizontalTextAlignment="Center"
-                                Margin="0,0,5,0"
-                                />
+                                HorizontalTextAlignment="Center" />
+
+                            <!-- Einheit -->
                             <Label
-                                Text="KG"
-                                VerticalOptions="Center"
-                                Padding="0,10,0,0"/>
-                        </HorizontalStackLayout>
-                    </DataTemplate>    
+                                Grid.Column="3"
+                                Text="kg"
+                                VerticalTextAlignment="Center" />
+
+                        </Grid>
+                    </DataTemplate> 
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Grid ColumnDefinitions="*,*,*"
-                   Margin="0,10,0,0">
+            <Grid  ColumnDefinitions="Auto,*,Auto"
+                   Margin="0,10,0,0"
+                   Padding="20,0">
                 <Label
                     Grid.Column="0"
-                    HorizontalOptions="Start"
-                    Margin="20,0,0,0"
                     Text="+"
-                    FontSize="16"
-                    WidthRequest="24"
-                    HeightRequest="24"
+                    FontSize="18"
+                    WidthRequest="32"
+                    HeightRequest="32"
                     BackgroundColor="Green"
                     TextColor="White"
                     HorizontalTextAlignment="Center"
@@ -61,28 +76,24 @@
                     </Label.GestureRecognizers>
                 </Label>
                 <Button
+                    x:Name="Button"
                     Grid.Column="1"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Margin="0,0,60,0"
-                    Padding="0,0,0,0"
                     Text="Speichern"
                     FontSize="16"
-                    WidthRequest="200"
-                    CornerRadius="100"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Padding="24,8"
+                    CornerRadius="24"
                     BackgroundColor="DarkBlue"
                     TextColor="White"
                     Command="{Binding SaveSetCommand}"
                 />
                 <Label
                     Grid.Column="2"
-                    HorizontalOptions="End"
-                    Margin="0,0,90,0"
-                    Padding="0,0,0,10"
                     Text="-"
-                    FontSize="16"
-                    WidthRequest="24"
-                    HeightRequest="24"
+                    FontSize="18"
+                    WidthRequest="32"
+                    HeightRequest="32"
                     BackgroundColor="DarkRed"
                     TextColor="White"
                     HorizontalTextAlignment="Center"
@@ -93,30 +104,71 @@
                 </Label>
             </Grid>
             <ScrollView>
-            <toolkit:Expander Command="{Binding LoadSetHistoryCommand}" IsExpanded="{Binding IsHistoryExpanded, Mode=TwoWay}">
-                <toolkit:Expander.Header>
-                    <Label Text="Verlauf"
-                           FontAttributes="Bold"
-                           FontSize="Medium" >
-                           </Label>
-                </toolkit:Expander.Header>
-                    <CollectionView ItemsSource="{Binding SetHistory}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:SetEntry">
-                                <HorizontalStackLayout Margin="0,0,80,0">
-                                    <Label
-                                        Margin="0,0,80,0"
-                                        Text="{Binding performedAt}"/>
-                                    <Label
-                                        Margin="0,0,80,0"
-                                        Text="{Binding repetitions}"/>
-                                    <Label
-                                        Text="{Binding weight}"/>
-                                </HorizontalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-            </toolkit:Expander>
+                <VerticalStackLayout Margin="20">
+                    <toolkit:Expander
+                        ExpandedChanged="OnExpandedChangedComment">
+                        <toolkit:Expander.Header>
+                            <HorizontalStackLayout>
+                                <Label
+                                    Text=">"
+                                    FontSize="20"
+                                    Margin="0,0,10,0"
+                                    FontAttributes="Bold"
+                                    VerticalTextAlignment="Center"
+                                    x:Name="ArrowLabelComment"/>
+                                <Label Text="Kommentar"
+                                       VerticalTextAlignment="Center"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium"/>
+                            </HorizontalStackLayout>
+                        </toolkit:Expander.Header>
+                        <Editor
+                            x:Name="CommentEditor"
+                            Text="{Binding Exercise.Comment, Mode=TwoWay}"
+                            AutoSize="TextChanges"
+                            Unfocused="Editor_Unfocused"
+                            Margin="0,0,0,20"
+                            Placeholder="Hier können Sie einen Kommentar für die Übung anlegen"/>
+                    </toolkit:Expander>
+                    <toolkit:Expander 
+                        ExpandedChanged="OnExpandedChangedHistory"
+                        Command="{Binding LoadSetHistoryCommand}" 
+                        IsExpanded="{Binding IsHistoryExpanded, Mode=TwoWay}">
+                        <toolkit:Expander.Header>
+                            <HorizontalStackLayout>
+                                <Label
+                                    VerticalTextAlignment="Center"
+                                    Text=">"
+                                    FontSize="20"
+                                    Margin="0,0,10,0"
+                                    FontAttributes="Bold"
+                                    x:Name="ArrowLabelVerlauf"/>
+                                <Label 
+                                    VerticalTextAlignment="Center"
+                                    Text="Verlauf"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium" >
+                            </Label>
+                            </HorizontalStackLayout>
+                        </toolkit:Expander.Header >
+                        <CollectionView ItemsSource="{Binding SetHistory}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:SetEntry">
+                                    <HorizontalStackLayout Margin="0,0,40,0">
+                                        <Label
+                                            Margin="0,0,40,0"
+                                            Text="{Binding performedAt}"/>
+                                        <Label
+                                            Margin="0,0,40,0"
+                                            Text="{Binding repetitions, StringFormat='{0} Wdh.'}"/>
+                                        <Label
+                                            Text="{Binding weight, StringFormat='{0} KG'}"/>
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </toolkit:Expander>
+                </VerticalStackLayout>
             </ScrollView>
         </VerticalStackLayout>
     </ContentPage.Content>

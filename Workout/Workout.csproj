@@ -41,6 +41,10 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <AndroidLinkMode>None</AndroidLinkMode>
+    </PropertyGroup>
+
     <ItemGroup>
         <!-- App Icon -->
         <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -80,9 +84,6 @@
       <MauiXaml Update="Views\pages\ExercisePage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
-      <MauiXaml Update="Views\pages\SetEntryPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
       <MauiXaml Update="Views\pages\WorkoutPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
@@ -106,10 +107,6 @@
       </Compile>
       <Compile Update="Views\pages\ExercisePage.xaml.cs">
         <DependentUpon>ExercisePage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\pages\SetEntryPage.xaml.cs">
-        <DependentUpon>SetEntryPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
       <Compile Update="Views\pages\WorkoutPage.xaml.cs">

@@ -14,6 +14,13 @@ public static class MauiProgram
         {
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            fonts.AddFont("Metropolis-Bold.otf", "MetropolisBold");
+            fonts.AddFont("Metropolis-Black.otf", "MetropolisBlack");
+            fonts.AddFont("Metropolis-SemiBold.otf", "MetropolisSemiBold");
+            fonts.AddFont("Pricedown Bl.otf", "PricedownBl");
+            fonts.AddFont("Queensides-3z7Ey.ttf", "Queensides");
+            fonts.AddFont("QueensidesLight-ZVj3l.ttf", "QueensidesLight");
+            fonts.AddFont("QueensidesMedium-x30zV.ttf", "QueensidesMedium");
         }).UseMauiCommunityToolkit();
         builder.Services.AddSingleton<WorkoutDatabase>();
         builder.Services.AddSingleton<MainPage>();
@@ -24,9 +31,6 @@ public static class MauiProgram
         builder.Services.AddTransient<WorkoutPage>();
         builder.Services.AddTransient<ExerciseDetailPage>();
         builder.Services.AddTransient<ExerciseDetailViewModel>();
-
-        
-
         
 #if DEBUG
         builder.Logging.AddDebug();

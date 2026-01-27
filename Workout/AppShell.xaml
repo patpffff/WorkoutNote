@@ -9,6 +9,10 @@
     Shell.FlyoutBehavior="Flyout"
     Shell.TabBarIsVisible="False">
 <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+    <Shell.TitleView>
+        <Label
+            Text=""/>
+    </Shell.TitleView>
     <ShellContent
         Title="Workouts"
         ContentTemplate="{DataTemplate local:MainPage}"

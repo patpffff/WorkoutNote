@@ -107,6 +107,18 @@ public partial class WorkoutViewModel : ObservableObject
     }
 
     [RelayCommand]
+    async Task Delete(WorkoutPlanExerciseView workoutPlanExerciseView)
+    {
+        bool delete = await Application.Current.MainPage.DisplayAlert("Delete",
+            "Sind Sie sicher, dass sie die Übung aus dem Workout löschen wollen?", "OK", "Abbrechen");
+        if (delete)
+        {
+            await _database.DeleteWorkoutPlanExerciseAsync(workoutPlanExerciseView);
+            WorkoutPlanExerciseViews.Remove(workoutPlanExerciseView);
+        }
+    }
+
+    [RelayCommand]
     public async Task Navigation(WorkoutPlanExerciseView workoutPlanExerciseView)
     {
         await Shell.Current.GoToAsync(nameof(ExerciseDetailPage), new Dictionary<string, object>

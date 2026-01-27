@@ -6,11 +6,17 @@
              xmlns:models="clr-namespace:Workout.Models"
              xmlns:view="clr-namespace:Workout.Views.view"
              x:Class="Workout.Views.WorkoutPage"
-             x:DataType="viewModels:WorkoutViewModel"
-             Title="{Binding Workout.Name}">
+             x:DataType="viewModels:WorkoutViewModel">
     <ContentPage.Content>
         <ScrollView>
             <VerticalStackLayout>
+                <Label 
+                    TextColor="Black"
+                    FontAttributes="Bold" 
+                    FontSize="30" Margin="10,10,10,10" 
+                    Text="{Binding Workout.Name}"
+                    HorizontalOptions="Center"
+                    FontFamily="PricedownBl"></Label>
                 <CollectionView ItemsSource="{Binding WorkoutPlanExerciseViews}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="view:WorkoutPlanExerciseView">
@@ -21,29 +27,31 @@
                                                Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                                CommandParameter="{Binding .}"/>
                                 </SwipeView.RightItems>
-                                <Border Margin="10" Padding="10" BackgroundColor="LightGray">
+                                <Border  Margin="10" 
+                                         Padding="10"
+                                         Stroke="Transparent">
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer
                                             Command="{Binding BindingContext.NavigationCommand,
                   Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                             CommandParameter="{Binding .}"/>
                                     </Border.GestureRecognizers>
-                                    <Label Text="{Binding ExerciseName}" FontSize="20" TextColor="Black"/>
+                                    <Label Text="{Binding ExerciseName}"
+                                           FontFamily="MetropolisBold"
+                                           FontSize="20" 
+                                           TextColor="Black"
+                                           HorizontalOptions="Center"/>
                                 </Border>
                             </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <HorizontalStackLayout Padding="10">
                     <Button 
                         Text="+" 
                         FontAttributes="Bold" 
                         Margin="10"
+                        HorizontalOptions="Center"
                         Command="{Binding AddWithPopupCommand}"/> 
-                    <Label 
-                        Text="Übung dem Workout hinzufügen" 
-                        VerticalTextAlignment="Center"/>
-                </HorizontalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
     </ContentPage.Content>

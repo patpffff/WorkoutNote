@@ -10,13 +10,7 @@ public partial class AddWorkoutExercisePopup : Popup
         InitializeComponent();
         BindingContext = vm;
     }
-
-
-    private async void OnOkClicked(object? sender, EventArgs e)
-    {
-        await CloseAsync();
-    }
-
+    
     private async void OnCancelClicked(object? sender, EventArgs e)
     {
         await CloseAsync();
