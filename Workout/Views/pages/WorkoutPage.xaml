@@ -5,6 +5,7 @@
              xmlns:viewModels="clr-namespace:Workout.ViewModels"
              xmlns:models="clr-namespace:Workout.Models"
              xmlns:view="clr-namespace:Workout.Views.view"
+             xmlns:strings="clr-namespace:Workout.Resources.Languages"
              x:Class="Workout.Views.WorkoutPage"
              x:DataType="viewModels:WorkoutViewModel">
     <ContentPage.Content>
@@ -22,7 +23,7 @@
                         <DataTemplate x:DataType="view:WorkoutPlanExerciseView">
                             <SwipeView>
                                 <SwipeView.RightItems>
-                                    <SwipeItem Text="Delete"
+                                    <SwipeItem Text="{x:Static strings:AppResources.Delete}"
                                                BackgroundColor="LightPink"
                                                Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                                CommandParameter="{Binding .}"/>

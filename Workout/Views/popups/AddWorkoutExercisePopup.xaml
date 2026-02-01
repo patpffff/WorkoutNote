@@ -7,12 +7,13 @@
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:viewModels="clr-namespace:Workout.ViewModels"
              xmlns:models="clr-namespace:Workout.Models"
+             xmlns:strings="clr-namespace:Workout.Resources.Languages"
              x:Class="Workout.Views.popups.AddWorkoutExercisePopup"
              x:DataType="viewModels:WorkoutViewModel">
         <ScrollView>    
             <VerticalStackLayout>
                 <Button 
-                    Text="Neue Übungen anlegen"
+                    Text="{x:Static strings:AppResources.Add_new_Exercise}"
                     FontAttributes="Bold" 
                     HorizontalOptions="Center"
                     FontFamily="MetropolisBold"
@@ -42,7 +43,7 @@
                        </DataTemplate>
                    </CollectionView.ItemTemplate> 
                 </CollectionView>
-                <Button Text="Abbrechen" 
+                <Button Text="{x:Static strings:AppResources.Cancel}"
                         Clicked="OnCancelClicked"
                         HorizontalOptions="Center"/>
         </VerticalStackLayout>

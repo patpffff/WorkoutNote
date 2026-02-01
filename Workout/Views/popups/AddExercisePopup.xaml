@@ -6,17 +6,18 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                xmlns:models="clr-namespace:Workout.Models"
                xmlns:system="clr-namespace:System;assembly=System.Runtime"
+               xmlns:strings="clr-namespace:Workout.Resources.Languages"
                x:Class="Workout.Views.popups.AddExercisePopup">
     <toolkit:Popup.Content>
         <VerticalStackLayout Padding="20" WidthRequest="300">
-            <Label Text="Workout hinzufügen" FontAttributes="Bold" FontSize="20" />
+            <Label Text="{x:Static strings:AppResources.Add_Workout}" FontAttributes="Bold" FontSize="20" />
 
             <!-- WICHTIG -->
-            <Entry x:Name="ExerciseName" Placeholder="Name der Übung" />
+            <Entry x:Name="ExerciseName" Placeholder="{x:Static strings:AppResources.Exercise_Name}" />
 
             <HorizontalStackLayout Margin="0,20,0,0" Spacing="10">
                 <Button Text="OK" Clicked="OnOkClicked"/>
-                <Button Text="Abbrechen" Clicked="OnCancelClicked"/>
+                <Button Text="{x:Static strings:AppResources.Cancel}" Clicked="OnCancelClicked"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </toolkit:Popup.Content>
