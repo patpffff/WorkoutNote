@@ -1,6 +1,9 @@
 ﻿using System.Text;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Storage;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Devices;
+using Microsoft.Maui.Storage;
 using Workout.Views;
 
 namespace Workout;

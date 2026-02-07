@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net9.0-android</TargetFrameworks>
+        <TargetFrameworks>net9.0-android,net9.0-windows10.0.19041.0</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
@@ -21,10 +21,10 @@
         <Nullable>enable</Nullable>
 
         <!-- Display name -->
-        <ApplicationTitle>Workout</ApplicationTitle>
+        <ApplicationTitle>WorkNote</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.workout</ApplicationId>
+        <ApplicationId>com.patpffff.workNote</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -50,7 +50,7 @@
         <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
         <!-- Splash Screen -->
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="256,256" />
 
         <!-- Images -->
         <MauiImage Include="Resources\Images\*" />
@@ -125,10 +125,22 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\Languages\AppResources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Languages\AppResources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+            <StronglyTypedFileName>Resources\Languages\AppResources.Designer.cs</StronglyTypedFileName>
+            <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
+            <StronglyTypedNamespace>Workout.Resources.Languages</StronglyTypedNamespace>
+            <StronglyTypedClassName>AppResources</StronglyTypedClassName>
+        </EmbeddedResource>
     </ItemGroup>
+
+    <PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+        <AndroidKeyStore>True</AndroidKeyStore>
+        <AndroidSigningKeyStore>$(MSBuildProjectDirectory)\key.keystore</AndroidSigningKeyStore>
+        <AndroidSigningStorePass>$!P28JwndMWf!$</AndroidSigningStorePass>
+        <AndroidSigningKeyAlias>WorkoutNote</AndroidSigningKeyAlias>
+        <AndroidSigningKeyPass>$!P28JwndMWf!$</AndroidSigningKeyPass>
+    </PropertyGroup>
 
 </Project>
