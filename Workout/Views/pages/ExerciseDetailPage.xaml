@@ -82,6 +82,7 @@
                     Grid.Column="1"
                     Text="Speichern"
                     FontSize="16"
+                    Clicked="Button_OnClicked"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     Padding="24,8"

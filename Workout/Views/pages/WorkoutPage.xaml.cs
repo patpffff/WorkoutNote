@@ -37,6 +37,7 @@ public partial class WorkoutPage : ContentPage
         
         // ERST Daten laden
         await vm.LoadExercisesAsync();
+        await vm.LoadExerciseView();
         
         // DANN Popup mit Daten erstellen
         var popup = new AddWorkoutExercisePopup(vm);

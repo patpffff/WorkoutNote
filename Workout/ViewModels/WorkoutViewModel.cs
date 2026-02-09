@@ -17,6 +17,9 @@ public partial class WorkoutViewModel : ObservableObject
     WorkoutDatabase _database;
     
     [ObservableProperty]
+    private ObservableCollection<ExerciseView> _exerciseView;
+    
+    [ObservableProperty]
     private WorkoutPlan _workout;
 
     [ObservableProperty]
@@ -32,6 +35,7 @@ public partial class WorkoutViewModel : ObservableObject
     public WorkoutViewModel(WorkoutDatabase database)
     {
         WorkoutPlanExerciseViews = new ObservableCollection<WorkoutPlanExerciseView>();
+        ExerciseView = new ObservableCollection<ExerciseView>();
         _database = database;
         _workoutPlanExercises = new ObservableCollection<WorkoutPlanExercise>();
         Exercises = new ObservableCollection<Exercise>();
@@ -125,5 +129,28 @@ public partial class WorkoutViewModel : ObservableObject
         {
             ["WorkoutPlanExerciseView"]  = workoutPlanExerciseView
         });
+    }
+    
+    public async Task LoadExerciseView()
+    {
+        foreach (var exe in Exercises)
+        {
+            if (WorkoutPlanExerciseViews.Any(x => x.ExerciseID == exe.ExerciseID))
+            {
+                ExerciseView.Add(new ExerciseView
+                {
+                    Exercise = exe, 
+                    IsInList =  true
+                });
+            }
+            else
+            {
+                ExerciseView.Add(new ExerciseView
+                {
+                    Exercise = exe, 
+                    IsInList =  false
+                });
+            }
+        }
     }
 }

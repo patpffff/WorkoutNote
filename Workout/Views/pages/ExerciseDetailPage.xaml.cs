@@ -64,4 +64,11 @@ public partial class ExerciseDetailPage : ContentPage
             await ArrowLabelVerlauf.RotateTo(0, 150, Easing.CubicIn);
         }
     }
+
+    private async void Button_OnClicked(object? sender, EventArgs e)
+    {
+        await CommentEditor.HideKeyboardAsync();
+        CommentEditor.Unfocus();
+        this.Unfocus();
+    }
 }

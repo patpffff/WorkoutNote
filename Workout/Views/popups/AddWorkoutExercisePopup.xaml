@@ -8,6 +8,7 @@
              xmlns:viewModels="clr-namespace:Workout.ViewModels"
              xmlns:models="clr-namespace:Workout.Models"
              xmlns:strings="clr-namespace:Workout.Resources.Languages"
+             xmlns:view="clr-namespace:Workout.Views.view"
              x:Class="Workout.Views.popups.AddWorkoutExercisePopup"
              x:DataType="viewModels:WorkoutViewModel">
         <ScrollView>    
@@ -19,9 +20,9 @@
                     FontFamily="MetropolisBold"
                     Margin="0,0,0,20"
                     Clicked="OnNewExerciseClicked"/> 
-                <CollectionView ItemsSource="{Binding Exercises}">
+                <CollectionView ItemsSource="{Binding ExerciseView}">
                    <CollectionView.ItemTemplate>
-                       <DataTemplate x:DataType="models:Exercise">
+                       <DataTemplate x:DataType="view:ExerciseView">
                            <Border 
                                Margin="10"
                                StrokeThickness="1">
@@ -32,7 +33,7 @@
                                        CommandParameter="{Binding .}" />
                                </Border.GestureRecognizers>
                                <Label 
-                                   Text="{Binding Name}" 
+                                   Text="{Binding Exercise.Name}" 
                                    Padding="10"
                                    FontSize="30" 
                                    HorizontalTextAlignment="Center"
