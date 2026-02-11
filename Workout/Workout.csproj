@@ -138,9 +138,9 @@
     <PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
         <AndroidKeyStore>True</AndroidKeyStore>
         <AndroidSigningKeyStore>$(MSBuildProjectDirectory)\key.keystore</AndroidSigningKeyStore>
-        <AndroidSigningStorePass>$!P28JwndMWf!$</AndroidSigningStorePass>
+        <AndroidSigningStorePass></AndroidSigningStorePass>
         <AndroidSigningKeyAlias>WorkoutNote</AndroidSigningKeyAlias>
-        <AndroidSigningKeyPass>$!P28JwndMWf!$</AndroidSigningKeyPass>
+        <AndroidSigningKeyPass></AndroidSigningKeyPass>
     </PropertyGroup>
 
 </Project>
