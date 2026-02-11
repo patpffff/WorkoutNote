@@ -10,3 +10,8 @@ C#
 MVVM Pattern
 SQLite / Local Storage
 Dependency Injection
+
+to-do:
+unit tests?
+page eimstellungen 
+zeit tracking pro übung und für workout
