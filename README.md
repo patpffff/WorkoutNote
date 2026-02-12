@@ -11,8 +11,9 @@ Der Fokus liegt auf:
 - klarer Projektstruktur  
 
 ---
-![Screenshot_20260212_205141](https://github.com/user-attachments/assets/2f23132a-4650-4bbc-a5a6-6c552e0b6528)
-![Screenshot_20260212_204907](https://github.com/user-attachments/assets/e30c4731-24f3-4961-8517-8cc2f1d63a69)
+![Screenshot_20260212_205141](https://github.com/user-attachments/assets/7bc1bb82-641c-4b60-80b6-e3888c395ee2)
+
+![Screenshot_20260212_204907](https://github.com/user-attachments/assets/1cc2451c-ee2e-4e98-9764-d9d14a261f71)
 
 ## Features
 
