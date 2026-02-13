@@ -4,13 +4,6 @@ WorkoutNote ist eine mobile Workout-Tracking-App, entwickelt mit C# und .NET MAU
 
 https://play.google.com/store/apps/details?id=com.patpffff.workNote
 
-Der Fokus liegt auf:
-
-- sauberer MVVM-Architektur  
-- lokaler Datenspeicherung 
-- Dependency Injection  
-- klarer Projektstruktur  
-
 ---
 ![Screenshot_20260212_205141](https://github.com/user-attachments/assets/7bc1bb82-641c-4b60-80b6-e3888c395ee2)
 
